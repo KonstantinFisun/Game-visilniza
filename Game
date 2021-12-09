@@ -1,0 +1,305 @@
+#include<iostream>
+#include<vector>
+#include<Windows.h>
+#include <string> 
+
+bool restart_game = true;
+
+class Game
+{
+    std::string game_word, temp, letter_temp;
+    char slovo[50]; int i;
+    char letter;
+    bool is_right = false, game_win = false;
+    int change_to_win = 7;
+
+public:
+
+    Game()
+    {
+    }
+
+    void start()
+    {
+        setlocale(LC_ALL, "rus");
+        using namespace std;
+        bool game_start = true;
+        cout << "Загадайте слово: ";
+        cin >> slovo;
+        game_word = slovo;
+        letter_temp += '&';//костыль для работы проверки
+
+        temp.resize(game_word.size());
+        for (int i = 0; i < temp.size(); i++) // игровое поле
+        {
+            temp[i] = '_';
+        }
+
+        while (!game_win && !change_to_win == 0)
+        {
+
+            for (int i = 0; game_word[i]; i++) // проверка слов
+            {
+                if (letter == game_word[i] || letter == game_word[i] + 32) // +32 для проверки на верхний и нижний регистр
+                {
+                    temp[i] = game_word[i];
+                    is_right = true;
+                }
+
+            }
+
+            if (game_word == temp) // проверка на победу
+            {
+                game_win = true;
+                break;
+            }
+
+            system("cls");
+            cout << "Добро пожаловать в игру \"Виселица\"!\nСлово - ";
+
+            for (int i = 0; i < temp.size(); i++) // вывод строки загаданного слова
+            {
+                cout << temp[i] << " ";
+
+            }
+
+
+            if (!game_start) // игнорирование первого хода и проверка на правильность буквы
+            {
+
+                for (int i = 1; i <= letter_temp.size(); i++)
+                {
+                    if (letter == letter_temp[i])//проверка на повтор
+                    {
+                        cout << "\nВы уже называли данную букву! Выберите новую.\n";
+                        is_right = false;
+                        break;
+
+                    }
+                    else
+                    {
+
+                        if (i == letter_temp.size()) // решению по правильности буквы только после проверки на повтор
+                        {
+
+                            if (is_right)
+                            {
+
+                                cout <<
+
+                                    "\n"
+                                    "\n"
+                                    "\n"
+                                    "\n"
+                                    "\n"
+                                    "\n"
+                                    "\n"
+                                    "\n"
+                                    "\n"
+                                    "\n"
+                                    "\n"
+                                    " ============================\n"
+                                    " ||                        ||\n";
+                                cout << "\nВы верно угадали букву!\n";
+                                letter_temp += letter;
+                                letter_temp += (letter - 32);
+
+                                is_right = false;
+                                break;
+                            }
+                            else
+                            {
+                                std::cout << "\nВаша буква не верна\n";
+                                if (change_to_win == 7) {
+                                    cout <<
+
+                                        "\n"
+                                        "\n"
+                                        "\n"
+                                        "\n"
+                                        "\n"
+                                        "\n"
+                                        "\n"
+                                        "\n"
+                                        "\n"
+                                        "\n"
+                                        "\n"
+                                        " ============================\n"
+                                        " ||                        ||\n";
+                                    change_to_win--;
+                                }
+                                else if (change_to_win == 6) {
+
+                                    cout <<
+                                        "        $$$$$$$$$$$$$$$\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        " ============================\n"
+                                        " ||                        ||\n";
+                                    change_to_win--;
+                                }
+                                else if (change_to_win == 5) {
+                                    change_to_win--;
+                                    cout <<
+                                        "        $$$$$$$$$$$$$$$\n"
+                                        "        |             $\n"
+                                        "        |             $\n"
+                                        "        |             $\n"
+                                        "        |             $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        " ============================\n"
+                                        " ||                        ||\n";
+                                }
+                                else if (change_to_win == 4) {
+                                    change_to_win--;
+                                    cout <<
+                                        "        $$$$$$$$$$$$$$$\n"
+                                        "        |             $\n"
+                                        "        |             $\n"
+                                        "        |             $\n"
+                                        "        |             $\n"
+                                        "        O             $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        " ============================\n"
+                                        " ||                        ||\n";
+                                }
+                                else if (change_to_win == 3) {
+                                    change_to_win--;
+                                    cout <<
+                                        "        $$$$$$$$$$$$$$$\n"
+                                        "        |             $\n"
+                                        "        |             $\n"
+                                        "        |             $\n"
+                                        "        |             $\n"
+                                        "        O             $\n"
+                                        "      /   \\           $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        " =============================\n"
+                                        " ||                         ||\n";
+                                }
+                                else if (change_to_win == 2) {
+                                    change_to_win--;
+                                    cout <<
+                                        "        $$$$$$$$$$$$$$$\n"
+                                        "        |             $\n"
+                                        "        |             $\n"
+                                        "        |             $\n"
+                                        "        |             $\n"
+                                        "        O             $\n"
+                                        "      / | \\            $\n"
+                                        "        |             $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        " =============================\n"
+                                        " ||                         ||\n";
+                                }
+                                else if (change_to_win == 1) {
+                                    change_to_win--;
+                                    cout <<
+                                        "        $$$$$$$$$$$$$$$\n"
+                                        "        |             $\n"
+                                        "        |             $\n"
+                                        "        |             $\n"
+                                        "        |             $\n"
+                                        "        O             $\n"
+                                        "      / | \\           $\n"
+                                        "        |             $\n"
+                                        "       / \\            $\n"
+                                        "                      $\n"
+                                        "                      $\n"
+                                        " ============================\n"
+                                        " ||                                                       ||\n";
+                                }
+                                cout << "У вас осталось " << change_to_win << " попыток\n";
+
+                            }
+                        }
+                    }
+
+                }
+                if (change_to_win == 0) //проверка на проигрыш
+                    break;
+            }
+
+            cout << "\nУгадайте букву:";
+            cin >> letter;
+
+            game_start = false; // блок проверки для 1 хода
+        }
+
+        if (game_win)
+        {
+            system("color A0");
+            system("cls");
+            std::cout << "Слово - ";
+            for (int i = 0; i < temp.size(); i++) // вывод строки загаданного слова
+            {
+                cout << temp[i] << " ";
+            }
+
+            cout << "\nВы победили!\n";
+        }
+        else
+        {
+            system("color C0");
+            system("cls");
+            cout << "Слово - ";
+            for (int i = 0; i < game_word.size(); i++) // вывод строки загаданного слова
+            {
+                cout << game_word[i] << " ";
+            }
+
+            cout << "\nВы Проиграли!\n";
+        }
+
+        char restart;
+
+        cout << "Желаете ли сыграть снова?(Д/Н)";
+
+        cin >> restart;
+        if (restart == 'Н' || restart == 'н') { restart_game = false; }
+        cout << "Введите слово: ";
+    }
+
+};
+
+int main()
+{
+    setlocale(LC_ALL, "rus");
+    system("color F0");
+    using namespace std;
+
+    srand(time(0));
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+
+    do
+    {
+        Game s;
+        s.start();
+    } while (restart_game);
+
+    return 0;
+
+}
